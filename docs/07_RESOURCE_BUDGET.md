@@ -11,7 +11,7 @@ The only dataset selected by default is video-backed `lerobot/libero` (official 
 | selected LIBERO data + metadata/decode cache | 8 GB | 1.9-GB official download plus margin |
 | HF model/released-anchor/base cache | 12 GB | 0.5–0.6B models plus duplicate revisions and snapshots |
 | active output/temp + logs | 15 GB | decode, reports, retained raw outputs |
-| one resumable checkpoint | 4 GB reserve | conservative: model + optimizer/scheduler/processors; measure at R5 |
+| one resumable checkpoint | 4 GB reserve | conservative: model + optimizer/scheduler/processors; measure at R7 |
 | mandated six checkpoints + best | 28 GB | 7 × 4 GB reserve; deduplicate only after hash verification |
 | rollout videos | 20 GB | representative all stages + compressed final set; cap and index |
 | operational free-space reserve | 20 GB | downloads/checkpoint atomic writes |
@@ -31,14 +31,14 @@ These are ranges, not promises. They must be recalculated from A1/A2 episode sec
 | Phase | Estimate on 1×4090 | Assumption |
 |---|---:|---|
 | A1 canary (15 episodes) | 0.5–2 h | first-time JIT/cache/EGL/debug allowance dominates |
+| A3 smoke | 1–3 h | batch 8, conditional 16, and batch 4 only after OOM; report microstep timing |
 | A2 released anchor (400 episodes) | 8–24 h | 1.2–3.6 min/episode including reset/video; measure before treating as budget |
-| A3 smoke | 1–3 h | three physical-batch attempts and reports |
-| A4 100K training | 12–36 h | 0.43–1.30 sec/optimizer step, including single-GPU data loading and saves; historical 4-GPU throughput is not used as a direct estimate |
+| A4 100K updates | pending A3 measurement | `100000 × a × measured_microstep_seconds / 3600`, plus checkpoint overhead; 400K microsteps at b=16/a=4 or 800K at b=8/a=8 |
 | A5 quick/intermediate eval | 4–18 h | coverage intentionally deferred until episode time is known |
 | A5 endpoint 400 episodes | 8–24 h | same measured rate as A2 |
 | A5 three seeds (1200 episodes) | 24–72 h | three complete 400-episode runs |
 
-Planning total for primary completion: **~58–179 GPU-hours** including A1–A5 and a conservative intermediate-evaluation allowance. The mandatory cost before training (A1+A2+A3) is **~9.5–29 h**. If A2 fails its credibility gate, A4–A5 are not spent.
+The old fixed A4 wall-clock range is retired because current-main counts microsteps, not optimizer updates. A3 supplies the only valid per-microstep basis for the A4 estimate. Mandatory pre-training work is A1+A3+A2; if A1 fails, A3/A2/A4–A5 are not spent, and if A2 fails its credibility gate, A4–A5 are not spent.
 
 ## Network and local backup
 

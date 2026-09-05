@@ -6,7 +6,7 @@
 
 | Question | Evidence-based answer |
 |---|---|
-| LeRobot | v0.6.0 (repository says pinned, but no vendored commit manifest exists); superseded by 201's v0.6.1 lock |
+| LeRobot | v0.6.0 (repository says pinned, but no vendored commit manifest exists); superseded by 201's immutable current-main `3f2c29e` primary lock (`v0.6.1` is reference only) |
 | model | `lerobot/smolvla_base`, snapshot `c83c316...`; 450M; native feature regeneration from dataset metadata |
 | data | `lerobot/libero`, snapshot `a1aaac...`; 1,693 episodes / 273,465 frames |
 | data/model contract | 2×256 images, 8D state, 7D action, language max 48; action delta timestamps 0..49/10 |

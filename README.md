@@ -2,7 +2,7 @@
 
 Single-RTX-4090, current-stack reproduction project: fine-tune SmolVLA base on the 40-task LIBERO dataset and evaluate in closed loop on Spatial, Object, Goal, and Long.
 
-Status: **PRE-GPU MODIFY — immutable stack is locked; the v0.6.1 gradient-accumulation gate is blocked. No training, model/dataset download, remote connection, or GPU execution has occurred in this repository.**
+Status: **PRE-GPU FROZEN — current-main immutable training snapshot, Hub/Git pins, and 1×4090 protocol are locked. No training, model/dataset download, remote connection, or GPU execution has occurred in this repository.**
 
 The primary objective is a credible portfolio-quality VLA positive result, not a research ablation. The released checkpoint must first validate the evaluator before any training starts.
 

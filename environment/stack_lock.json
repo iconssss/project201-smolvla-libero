@@ -2,11 +2,20 @@
   "schema_version": 1,
   "locked_at": "2026-09-06",
   "purpose": "Flagship A pre-GPU immutable stack lock; none of these revisions may resolve from a moving branch at runtime.",
-  "lerobot": {
+  "lerobot_primary": {
+    "repository": "https://github.com/huggingface/lerobot",
+    "baseline": "official-main immutable snapshot",
+    "branch_at_audit": "main",
+    "commit": "3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e",
+    "installation": "source checkout at this exact commit",
+    "provenance": "https://github.com/huggingface/lerobot/tree/3f2c29ef7e44b1ddccbcda3b6a63939e53639e9e"
+  },
+  "lerobot_stable_reference": {
     "repository": "https://github.com/huggingface/lerobot",
     "version": "0.6.1",
     "tag": "v0.6.1",
     "commit": "7e241bd630a3719a56157a497ce5d08f244784f1",
+    "role": "fallback/reference only; never mix with a primary run",
     "provenance": "https://pypi.org/project/lerobot/0.6.1/"
   },
   "libero_upstream": {
@@ -25,6 +34,17 @@
     "repo_id": "lerobot/smolvla_base",
     "revision": "4d2f2b37fa245361ef1efe6d91ce96b8bd4af511",
     "provenance": "https://huggingface.co/lerobot/smolvla_base/commit/4d2f2b37fa245361ef1efe6d91ce96b8bd4af511"
+  },
+  "primary_initialization": {
+    "mode": "full pretrained SmolVLA base fine-tuning",
+    "policy_path": "local immutable snapshot of lerobot/smolvla_base at the revision above",
+    "forbidden_primary_substitute": "--policy.type=smolvla --policy.load_vlm_weights=true is a generic VLM-only reference recipe, not the primary initialization"
+  },
+  "training_semantics": {
+    "effective_batch_formula": "physical_batch * 1 GPU * gradient_accumulation_steps = 64",
+    "official_gradient_accumulation_cli": "--accelerator.gradient_accumulation.steps=<a>",
+    "steps_unit": "micro-batches; scheduler advances in the micro-batch loop",
+    "runtime_policy": "choose b in {8,16}, or b=4 only after OOM fallback; a=64/b"
   },
   "released_libero_checkpoint": {
     "repo_id": "HuggingFaceVLA/smolvla_libero",
