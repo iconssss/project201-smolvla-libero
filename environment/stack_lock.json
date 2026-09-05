@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "locked_at": "2026-09-06",
+  "purpose": "Flagship A pre-GPU immutable stack lock; none of these revisions may resolve from a moving branch at runtime.",
+  "lerobot": {
+    "repository": "https://github.com/huggingface/lerobot",
+    "version": "0.6.1",
+    "tag": "v0.6.1",
+    "commit": "7e241bd630a3719a56157a497ce5d08f244784f1",
+    "provenance": "https://pypi.org/project/lerobot/0.6.1/"
+  },
+  "libero_upstream": {
+    "repository": "https://github.com/Lifelong-Robot-Learning/LIBERO",
+    "branch_at_audit": "master",
+    "commit": "8f1084e3132a39270c3a13ebe37270a43ece2a01",
+    "provenance": "https://github.com/Lifelong-Robot-Learning/LIBERO/commit/8f1084e3132a39270c3a13ebe37270a43ece2a01"
+  },
+  "dataset": {
+    "repo_id": "lerobot/libero",
+    "repo_type": "dataset",
+    "revision": "a1aaacb7f6cd6ee5fb43120f673cebb0cfea7dd4",
+    "provenance": "https://huggingface.co/datasets/lerobot/libero/commit/a1aaacb7f6cd6ee5fb43120f673cebb0cfea7dd4"
+  },
+  "smolvla_base": {
+    "repo_id": "lerobot/smolvla_base",
+    "revision": "4d2f2b37fa245361ef1efe6d91ce96b8bd4af511",
+    "provenance": "https://huggingface.co/lerobot/smolvla_base/commit/4d2f2b37fa245361ef1efe6d91ce96b8bd4af511"
+  },
+  "released_libero_checkpoint": {
+    "repo_id": "HuggingFaceVLA/smolvla_libero",
+    "revision": "6721902bc4d61e50a3bfdb11dfb4cb626f05d102",
+    "provenance": "https://huggingface.co/HuggingFaceVLA/smolvla_libero/commit/6721902bc4d61e50a3bfdb11dfb4cb626f05d102"
+  },
+  "runtime_policy": {
+    "allow_moving_revision": false,
+    "r1_role": "verify, do not select or advance pins"
+  }
+}
