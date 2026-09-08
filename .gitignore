@@ -26,6 +26,10 @@ results/*.webm
 *.tar.gz
 
 # Credentials and machine-local logs
+.agents/**
+AGENTS.md
+README_A5_DRAFT.md
+.agents/references/PARATERA_LOCAL_CREDENTIAL.md
 *.key
 *.pem
 *token*
