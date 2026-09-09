@@ -1,5 +1,27 @@
 # Project201 Interview Guide
 
+## 20-second HR version
+
+I completed an end-to-end SmolVLA reproduction on one RTX 4090: 100,000
+fine-tuning updates followed by 400 closed-loop LIBERO episodes. The frozen
+checkpoint reached 71.5% overall success across 40 tasks. More importantly, I
+validated the model/data/action interface, checkpoint reload, controller
+horizon, exact episode coverage, and all rollout evidence, so the result is
+traceable rather than just a training-loss screenshot.
+
+## 60-second technical version
+
+I started from a pinned full SmolVLA policy, audited a mismatch between its
+static 3-camera/6D/6D metadata and LIBERO's runtime 2-camera/8D/7D contract,
+and applied the minimal official-factory correction without dropping base
+weights. I then completed 100K partial-fine-tuning updates, froze and
+strict-reloaded the checkpoint, and evaluated it over four suites, 40 tasks,
+and 400 fixed-init episodes. The final endpoint was 71.5%. I also aligned the
+closed-loop horizon to one action per replan and rejected vectorized schedulers
+that changed episode counts. The project shows that I can own the whole VLA
+experimental chain—from stack and checkpoint integrity to closed-loop failure
+analysis—while keeping the claim limited to a single-seed simulation result.
+
 ## What did you build?
 
 An auditable single-RTX4090 pipeline that fine-tunes SmolVLA from a pinned pretrained-policy snapshot on LIBERO and evaluates the 100K endpoint in a frozen 400-episode closed-loop protocol. The endpoint achieved 71.5% overall success: Spatial 82%, Object 78%, Goal 80%, and Long 46%.
@@ -32,3 +54,10 @@ Pins, checkpoint hashes, command/config snapshots, offline mode, EGL, hard reset
 
 First analyze the existing endpoint artifacts, especially the Long-suite gap, without changing the completed result. Any additional seed, scheduler/evaluator engineering, ablation, or real-robot work requires a new explicit protocol and authorization.
 
+## Claims I deliberately do not make
+
+- Not SOTA and not a novel model architecture.
+- Not full-parameter fine-tuning: 99.88M / 450.05M parameters were trainable.
+- Not a multi-seed significance claim; the released-anchor comparison is
+  descriptive only.
+- Not a real-robot deployment result.
